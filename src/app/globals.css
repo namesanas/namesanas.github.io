@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --shell-px: 1.5rem;
+}
+
+@layer base {
+  * {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-base text-txt font-sans antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgba(56, 189, 248, 0.24);
+    color: #eef7ff;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply tracking-tightest;
+    text-wrap: balance;
+  }
+
+  /* Accessible focus ring */
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid theme("colors.accent");
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Refined scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #060708;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1c2229;
+    border-radius: 8px;
+    border: 2px solid #060708;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #29323b;
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-shell px-6 sm:px-8;
+  }
+
+  .hairline {
+    @apply border-white/[0.08];
+  }
+
+  /* Fine engineering grid used as a section/hero backdrop */
+  .grid-backdrop {
+    background-image: theme("backgroundImage.grid-lines");
+    background-size: 40px 40px;
+    -webkit-mask-image: radial-gradient(
+      ellipse 75% 60% at 50% 40%,
+      #000 30%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      ellipse 75% 60% at 50% 40%,
+      #000 30%,
+      transparent 100%
+    );
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #d5dbe2 55%,
+      #8b939c 100%
+    );
+  }
+
+  .text-accent-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(120deg, #7dd3fc 0%, #38bdf8 50%, #22d3ee 100%);
+  }
+
+  /* Mono eyebrow label */
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.28em] text-accent/80;
+  }
+
+  /* Card surface used across sections */
+  .panel {
+    @apply rounded-xl border border-white/[0.08] bg-surface/70 backdrop-blur-sm;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-md border border-white/[0.09] bg-white/[0.03]
+      px-2.5 py-1 font-mono text-[11px] text-muted transition-colors duration-300;
+  }
+
+  .chip:hover {
+    @apply border-accent/40 text-accent-bright;
+  }
+
+  .link-underline {
+    @apply relative text-muted transition-colors duration-300 hover:text-txt;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
